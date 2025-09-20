@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aranya - Complete Visual Brand System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --sage: #7fb069;
+            --forest: #2d4a2b;
+            --mint: #a8d5ba;
+            --obsidian: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --graphite: #2d2d2d;
+            --ash: #4a4a4a;
+            --pearl: #f8f9fa;
+            --snow: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--obsidian);
+            color: var(--pearl);
+            line-height: 1.5;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 160px 0;
+            position: relative;
+            background: 
+                radial-gradient(ellipse 1000px 500px at 50% 30%, rgba(45, 74, 43, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 800px 400px at 20% 80%, rgba(127, 176, 105, 0.04) 0%, transparent 50%);
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%237fb069' stroke-width='0.5' fill='none' opacity='0.08'%3E%3Ccircle cx='100' cy='100' r='20'/%3E%3Ccircle cx='100' cy='100' r='40'/%3E%3Ccircle cx='100' cy='100' r='60'/%3E%3Ccircle cx='100' cy='100' r='80'/%3E%3C/g%3E%3C/svg%3E");
+            animation: ripple 20s ease-in-out infinite;
+        }
+        
+        @keyframes ripple {
+            0%, 100% { opacity: 0.08; }
+            50% { opacity: 0.15; }
+        }
+        
+        .hero h1 {
+            font-size: clamp(5rem, 12vw, 10rem);
+            font-weight: 200;
+            letter-spacing: -0.06em;
+            background: linear-gradient(135deg, 
+                var(--forest) 0%, 
+                var(--sage) 35%, 
+                var(--mint) 65%, 
+                var(--pearl) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--ash);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section {
+            padding: 140px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            position: relative;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(127, 176, 105, 0.3) 30%, 
+                rgba(168, 213, 186, 0.5) 50%, 
+                rgba(127, 176, 105, 0.3) 70%, 
+                transparent 100%);
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 200;
+            margin-bottom: 100px;
+            text-align: center;
+            color: var(--snow);
+            letter-spacing: -0.03em;
+        }
+        
+        .subsection {
+            margin-bottom: 120px;
+        }
+        
+        .subsection-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 60px;
+            color: var(--pearl);
+            letter-spacing: -0.01em;
+        }
+        
+        .color-system {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+        
+        .color-card {
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 28px;
+            padding: 50px;
+            backdrop-filter: blur(30px);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .color-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(127, 176, 105, 0.08) 0%, 
+                transparent 50%, 
+                rgba(168, 213, 186, 0.06) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        
+        .color-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(127, 176, 105, 0.1);
+        }
+        
+        .color-card:hover::before {
+            opacity: 1;
+        }
+        
+        .color-swatch {
+            width: 140px;
+            height: 140px;
+            border-radius: 28px;
+            margin: 0 auto 40px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .color-card:hover .color-swatch {
+            transform: scale(1.08) rotate(1deg);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        
+        .sage { 
+            background: linear-gradient(135deg, var(--sage) 0%, #6a9655 100%);
+        }
+        .forest { 
+            background: linear-gradient(135deg, var(--forest) 0%, #1f3520 100%);
+        }
+        .mint { 
+            background: linear-gradient(135deg, var(--mint) 0%, #8dc4a0 100%);
+        }
+        .obsidian { 
+            background: linear-gradient(135deg, var(--obsidian) 0%, #000000 100%);
+        }
+        .charcoal { 
+            background: linear-gradient(135deg, var(--charcoal) 0%, #0f0f0f 100%);
+        }
+        .snow { 
+            background: linear-gradient(135deg, var(--snow) 0%, #e9e9e9 100%);
+        }
+        
+        .color-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--snow);
+            font-weight: 400;
+        }
+        
+        .color-code {
+            color: var(--ash);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+        
+        .color-usage {
+            color: #777;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            font-weight: 300;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+            margin: 80px 0;
+        }
+        
+        .usage-card {
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            padding: 60px;
+            backdrop-filter: blur(40px);
+            transition: all 0.6s ease;
+            position: relative;
+        }
+        
+        .usage-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(127, 176, 105, 0.1);
+        }
+        
+        .usage-title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: var(--sage);
+        }
+        
+        .usage-description {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .usage-examples {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .usage-examples li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            color: #aaa;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .usage-examples li:last-child {
+            border-bottom: none;
+        }
+        
+        .usage-examples li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--sage);
+            font-size: 1.2rem;
+        }
+        
+        .typography-system {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 100px;
+            margin: 100px 0;
+        }
+        
+        .type-samples {
+            background: rgba(10, 10, 10, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 36px;
+            padding: 80px;
+            backdrop-filter: blur(50px);
+            position: relative;
+        }
+        
+        .type-samples::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 36px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(127, 176, 105, 0.06) 0%, 
+                transparent 50%, 
+                rgba(168, 213, 186, 0.04) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        
+        .display-xl {
+            font-size: 4.5rem;
+            font-weight: 200;
+            color: var(--snow);
+            margin-bottom: 40px;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+        }
+        
+        .display-l {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--pearl);
+            margin-bottom: 35px;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        .heading-l {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #d9d9d9;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+        }
+        
+        .heading-m {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #c9c9c9;
+            margin-bottom: 25px;
+            letter-spacing: -0.01em;
+        }
+        
+        .body-l {
+            font-size: 1.1rem;
+            color: #b9b9b9;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .body-m {
+            font-size: 1rem;
+            color: #a9a9a9;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-weight: 300;
+        }
+        
+        .code-block {
+            font-size: 0.9rem;
+            color: var(--mint);
+            background: rgba(45, 74, 43, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(127, 176, 105, 0.2);
+            font-weight: 400;
+        }
+        
+        .caption {
+            font-size: 0.85rem;
+            color: var(--ash);
+            font-weight: 300;
+            letter-spacing: 0.01em;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+        }
+        
+        .type-specs {
+            background: rgba(10, 10, 10, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 28px;
+            padding: 50px;
+            backdrop-filter: blur(30px);
+        }
+        
+        .spec-group {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        
+        .spec-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .spec-title {
+            color: var(--sage);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .spec-item {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .spec-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .spec-value {
+            color: var(--snow);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+        
+        .pattern-system {
+            margin: 120px 0;
+        }
+        
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 60px;
+            margin-bottom: 100px;
+        }
+        
+        .pattern-card {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 36px;
+            padding: 60px;
+            backdrop-filter: blur(40px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pattern-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(127, 176, 105, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(168, 213, 186, 0.04) 0%, transparent 40%);
+            animation: patternFlow 20s ease-in-out infinite;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        
+        .pattern-card:hover::after {
+            opacity: 1;
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(127, 176, 105, 0.08);
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(127, 176, 105, 0.05);
+        }
+        
+        @keyframes patternFlow {
+            0%, 100% { transform: rotate(0deg) scale(1) translate(0, 0); }
+            25% { transform: rotate(2deg) scale(1.02) translate(15px, -10px); }
+            50% { transform: rotate(0deg) scale(1.05) translate(0, 15px); }
+            75% { transform: rotate(-2deg) scale(1.02) translate(-15px, -10px); }
+        }
+        
+        .pattern-visual {
+            width: 100%;
+            height: 240px;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .neural-web {
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(127, 176, 105, 0.25) 0%, transparent 25%),
+                radial-gradient(circle at 75% 25%, rgba(45, 74, 43, 0.20) 0%, transparent 20%),
+                radial-gradient(circle at 50% 75%, rgba(168, 213, 186, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 25% 75%, rgba(127, 176, 105, 0.18) 0%, transparent 18%),
+                radial-gradient(circle at 75% 75%, rgba(45, 74, 43, 0.22) 0%, transparent 22%);
+            background-size: 180px 180px, 220px 220px, 200px 200px, 160px 160px, 190px 190px;
+            animation: neuralPulse 12s ease-in-out infinite;
+        }
+        
+        @keyframes neuralPulse {
+            0%, 100% { 
+                background-size: 180px 180px, 220px 220px, 200px 200px, 160px 160px, 190px 190px;
+                opacity: 0.8;
+            }
+            50% { 
+                background-size: 200px 200px, 240px 240px, 220px 220px, 180px 180px, 210px 210px;
+                opacity: 1;
+            }
+        }
+        
+        .organic-grid {
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(127, 176, 105, 0.15) 35px, rgba(127, 176, 105, 0.15) 36px),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(45, 74, 43, 0.12) 35px, rgba(45, 74, 43, 0.12) 36px),
+                repeating-linear-gradient(45deg, transparent, transparent 70px, rgba(168, 213, 186, 0.08) 70px, rgba(168, 213, 186, 0.08) 72px);
+            animation: gridShift 25s linear infinite;
+        }
+        
+        @keyframes gridShift {
+            0% { background-position: 0 0, 0 0, 0 0; }
+            100% { background-position: 0 35px, 35px 0, 70px 70px; }
+        }
+        
+        .growth-spiral {
+            background: 
+                conic-gradient(from 0deg at 50% 50%, 
+                    transparent 0deg,
+                    rgba(127, 176, 105, 0.20) 60deg,
+                    transparent 120deg,
+                    rgba(45, 74, 43, 0.15) 180deg,
+                    transparent 240deg,
+                    rgba(168, 213, 186, 0.10) 300deg,
+                    transparent 360deg),
+                radial-gradient(circle at center, transparent 30%, rgba(127, 176, 105, 0.08) 70%);
+            animation: spiralRotate 30s linear infinite;
+        }
+        
+        @keyframes spiralRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pattern-title {
+            font-size: 1.6rem;
+            color: var(--snow);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .pattern-description {
+            color: #aaa;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .pattern-usage {
+            background: rgba(127, 176, 105, 0.05);
+            border: 1px solid rgba(127, 176, 105, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .implementation-guide {
+            background: linear-gradient(135deg, 
+                rgba(10, 10, 10, 0.9) 0%, 
+                rgba(26, 26, 26, 0.5) 100%);
+            border: 1px solid rgba(127, 176, 105, 0.08);
+            border-left: 4px solid var(--sage);
+            padding: 60px;
+            border-radius: 28px;
+            margin: 80px 0;
+            backdrop-filter: blur(30px);
+            position: relative;
+        }
+        
+        .implementation-guide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(127, 176, 105, 0.02) 0%, 
+                transparent 50%, 
+                rgba(168, 213, 186, 0.01) 100%);
+            border-radius: 28px;
+            pointer-events: none;
+        }
+        
+        .implementation-guide h3 {
+            color: var(--mint);
+            margin-bottom: 35px;
+            font-weight: 400;
+            font-size: 1.8rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .implementation-guide ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .implementation-guide li {
+            margin-bottom: 18px;
+            padding-left: 35px;
+            position: relative;
+            color: #ddd;
+            font-weight: 300;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .implementation-guide li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--sage);
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .fade-in:nth-child(2n) {
+            animation-delay: 0.1s;
+        }
+        
+        .fade-in:nth-child(3n) {
+            animation-delay: 0.2s;
+        }
+        
+        .fade-in:nth-child(4n) {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .typography-system {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .pattern-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0;
+            }
+            
+            .section {
+                padding: 100px 0;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 60px;
+            }
+            
+            .display-xl {
+                font-size: 3rem;
+            }
+            
+            .display-l {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>Aranya</h1>
+            <p>Complete Visual System</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Color System</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Organic Spectrum</h3>
+                <div class="color-system">
+                    <div class="color-card fade-in">
+                        <div class="color-swatch sage"></div>
+                        <div class="color-info">
+                            <h3>Sage Green</h3>
+                            <div class="color-code">#7FB069</div>
+                            <div class="color-code">rgb(127, 176, 105)</div>
+                            <div class="color-usage">Primary brand color for CTAs, interactions, and key brand moments</div>
+                        </div>
+                    </div>
+                    <div class="color-card fade-in">
+                        <div class="color-swatch forest"></div>
+                        <div class="color-info">
+                            <h3>Forest Deep</h3>
+                            <div class="color-code">#2D4A2B</div>
+                            <div class="color-code">rgb(45, 74, 43)</div>
+                            <div class="color-usage">Deep foundation color for sophisticated depth and grounding</div>
+                        </div>
+                    </div>
+                    <div class="color-card fade-in">
+                        <div class="color-swatch mint"></div>
+                        <div class="color-info">
+                            <h3>Mint Glow</h3>
+                            <div class="color-code">#A8D5BA</div>
+                            <div class="color-code">rgb(168, 213, 186)</div>
+                            <div class="color-usage">Success states, progress indicators, and positive feedback</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Monochromatic Foundation</h3>
+                <div class="color-system">
+                    <div class="color-card fade-in">
+                        <div class="color-swatch obsidian"></div>
+                        <div class="color-info">
+                            <h3>Obsidian</h3>
+                            <div class="color-code">#0A0A0A</div>
+                            <div class="color-code">rgb(10, 10, 10)</div>
+                            <div class="color-usage">Primary background, creating depth and sophistication</div>
+                        </div>
+                    </div>
+                    <div class="color-card fade-in">
+                        <div class="color-swatch charcoal"></div>
+                        <div class="color-info">
+                            <h3>Charcoal</h3>
+                            <div class="color-code">#1A1A1A</div>
+                            <div class="color-code">rgb(26, 26, 26)</div>
+                            <div class="color-usage">Card backgrounds, elevated surfaces, and content areas</div>
+                        </div>
+                    </div>
+                    <div class="color-card fade-in">
+                        <div class="color-swatch snow"></div>
+                        <div class="color-info">
+                            <h3>Snow</h3>
+                            <div class="color-code">#FFFFFF</div>
+                            <div class="color-code">rgb(255, 255, 255)</div>
+                            <div class="color-usage">Primary text, high contrast elements, and light mode support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Usage Guidelines</h3>
+                <div class="usage-grid">
+                    <div class="usage-card fade-in">
+                        <h4 class="usage-title">Interface Elements</h4>
+                        <p class="usage-description">How colors work across UI components and interactive states.</p>
+                        <ul class="usage-examples">
+                            <li>Sage Green: Primary buttons, active states, brand accents</li>
+                            <li>Forest Deep: Secondary elements, hover effects, depth</li>
+                            <li>Mint Glow: Success messages, completed states, positive indicators</li>
+                            <li>Charcoal: Card backgrounds, modals, elevated content</li>
+                        </ul>
+                    </div>
+                    <div class="usage-card fade-in">
+                        <h4 class="usage-title">Typography Hierarchy</h4>
+                        <p class="usage-description">Color application for text hierarchy and readability.</p>
+                        <ul class="usage-examples">
+                            <li>Snow (#FFFFFF): Headlines, primary text content</li>
+                            <li>Pearl (#F8F9FA): Subheadings, important secondary text</li>
+                            <li>Medium contrast: Body text, descriptions</li>
+                            <li>Ash (#4A4A4A): Captions, metadata, subtle information</li>
+                        </ul>
+                    </div>
+                    <div class="usage-card fade-in">
+                        <h4 class="usage-title">Atmospheric Effects</h4>
+                        <p class="usage-description">Subtle color usage for depth and sophisticated layering.</p>
+                        <ul class="usage-examples">
+                            <li>Gradients: Always between adjacent colors in the palette</li>
+                            <li>Opacity layers: 2-8% for background patterns</li>
+                            <li>Border treatments: rgba values at 3-6% opacity</li>
+                            <li>Glow effects: Sage at 10-15% for brand moments</li>
+                        </ul>
+                    </div>
+                    <div class="usage-card fade-in">
+                        <h4 class="usage-title">Technical Implementation</h4>
+                        <p class="usage-description">Code and data visualization color applications.</p>
+                        <ul class="usage-examples">
+                            <li>Syntax highlighting: Mint for strings and values</li>
+                            <li>Code blocks: Forest background at 10% opacity</li>
+                            <li>Data visualization: Sequential scale from Forest to Mint</li>
+                            <li>Error states: Use Snow on Charcoal background</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Typography System</h2>
+            
+            <div class="typography-system">
+                <div class="type-samples fade-in">
+                    <div class="display-xl">Display XL</div>
+                    <div class="display-l">Display Large</div>
+                    <div class="heading-l">Heading Large</div>
+                    <div class="heading-m">Heading Medium</div>
+                    <div class="body-l">Large body text for important descriptions and introductory content that needs enhanced readability and prominence.</div>
+                    <div class="body-m">Medium body text for standard content, maintaining excellent readability while conserving space.</div>
+                    <div class="code-block">const aranya = {
+  theme: 'organic',
+  infrastructure: 'natural',
+  palette: ['sage', 'forest', 'mint']
+};</div>
+                    <div class="caption">Technical Details & Metadata</div>
+                </div>
+                
+                <div class="type-specs fade-in">
+                    <div class="spec-group">
+                        <div class="spec-title">Primary Font</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Font</span>
+                            <span class="spec-value">Inter (Sophisticated Sans-Serif)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Purpose</span>
+                            <span class="spec-value">Headlines, UI, Body Text</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Weight Range</span>
+                            <span class="spec-value">200–800</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Character</span>
+                            <span class="spec-value">Clean, Geometric, Organic</span>
+                        </div>
+                    </div>
+                    
+                    <div class="spec-group">
+                        <div class="spec-title">Technical Font</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Font</span>
+                            <span class="spec-value">JetBrains Mono</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Purpose</span>
+                            <span class="spec-value">Code, Data, Technical Content</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Weight</span>
+                            <span class="spec-value">300–600</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Character</span>
+                            <span class="spec-value">Technical, Precise, Readable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="implementation-guide">
+                <h3>Typography Implementation</h3>
+                <ul>
+                    <li>Inter provides clean geometry with subtle organic curves for sophistication</li>
+                    <li>Ultra-light weights (200-300) for display typography create ethereal presence</li>
+                    <li>JetBrains Mono adds technical credibility to code blocks and data</li>
+                    <li>Text hierarchy uses color gradation rather than dramatic weight changes</li>
+                    <li>All caps + letter-spacing for labels creates refined system language</li>
+                    <li>Maintain consistent baseline grid for vertical rhythm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Organic Pattern System</h2>
+            
+            <div class="pattern-system">
+                <div class="pattern-grid">
+                    <div class="pattern-card fade-in">
+                        <div class="pattern-visual neural-web"></div>
+                        <h3 class="pattern-title">Neural Web</h3>
+                        <p class="pattern-description">Interconnected nodes that pulse with organic rhythm, representing the complex connections within technical systems and AI networks.</p>
+                        <div class="pattern-usage">
+                            <strong>When to use:</strong> Hero sections, loading states, dashboard backgrounds, and areas emphasizing connectivity or AI/ML concepts.
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-card fade-in">
+                        <div class="pattern-visual organic-grid"></div>
+                        <h3 class="pattern-title">Organic Grid</h3>
+                        <p class="pattern-description">Subtle grid system with natural variations, providing structure while maintaining organic flow and breathing room for content.</p>
+                        <div class="pattern-usage">
+                            <strong>When to use:</strong> Documentation pages, form layouts, data tables, and anywhere structure needs to feel less rigid and more natural.
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-card fade-in">
+                        <div class="pattern-visual growth-spiral"></div>
+                        <h3 class="pattern-title">Growth Spiral</h3>
+                        <p class="pattern-description">Spiraling patterns inspired by natural growth sequences, fibonacci ratios, and organic expansion principles found in nature.</p>
+                        <div class="pattern-usage">
+                            <strong>When to use:</strong> Progress indicators, loading animations, about pages, and sections highlighting growth, evolution, or organic development.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="implementation-guide">
+                <h3>Pattern Implementation Strategy</h3>
+                <ul>
+                    <li>Use patterns at 4-8% opacity to create atmospheric depth without overwhelming content</li>
+                    <li>Layer multiple patterns at different scales for sophisticated visual complexity</li>
+                    <li>Animate patterns with 12-20 second cycles to create living, breathing interfaces</li>
+                    <li>Neural networks work best behind content that emphasizes technology and connectivity</li>
+                    <li>Organic grids provide structure without competing with typography or feeling rigid</li>
+                    <li>Growth spirals add energy to sections about progress, evolution, or organic development</li>
+                    <li>Always ensure patterns enhance spatial hierarchy without competing with typography</li>
+                    <li>Use CSS backdrop-filter for proper integration with glassmorphism effects</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="container">
+            <div class="implementation-guide">
+                <h3>Complete System Integration</h3>
+                <ul>
+                    <li>Dark mode is primary—light variants should maintain the same sophisticated depth</li>
+                    <li>All animations use cubic-bezier(0.23, 1, 0.32, 1) for organic, natural easing</li>
+                    <li>Transition durations: 0.7-0.8s for premium perception and quality feel</li>
+                    <li>Border radius: 28-36px for cards, 16-24px for smaller elements</li>
+                    <li>Backdrop blur: 30-50px for sophisticated glassmorphism effects</li>
+                    <li>Always maintain WCAG AAA compliance with 7:1 contrast ratios minimum</li>
+                    <li>JetBrains Mono establishes technical credibility while maintaining readability</li>
+                    <li>Patterns should breathe with content—creating living, adaptive interfaces</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Color swatch click to copy functionality
+        document.querySelectorAll('.color-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const colorCode = this.querySelector('.color-code').textContent;
+                navigator.clipboard.writeText(colorCode).then(() => {
+                    // Visual feedback
+                    this.style.transform = 'translateY(-12px) scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-12px) scale(1.02)';
+                        setTimeout(() => {
+                            this.style.transform = 'translateY(-12px) scale(1.02)';
+                        }, 150);
+                    }, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
